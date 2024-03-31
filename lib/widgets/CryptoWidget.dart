@@ -17,10 +17,10 @@ class CryptoWidget extends StatelessWidget {
             Obx(
                   () => controller.isLoading.value
                   ? const Center(
-                child: CircularProgressIndicator(),
+                   child: CircularProgressIndicator(),
               )
                   : ListView.builder(
-                  itemCount: 10,
+                  itemCount: 30,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
