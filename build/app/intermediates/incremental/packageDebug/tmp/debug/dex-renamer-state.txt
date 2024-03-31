@@ -1,4 +1,0 @@
-#Sun Mar 31 17:40:56 IRST 2024
-base.0=C\:\\Users\\Asus\\StudioProjects\\exchange_rate\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
