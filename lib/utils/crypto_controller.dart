@@ -5,6 +5,7 @@ import '../models/Crypto_model.dart';
 class CoinController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<Coin> coinsList = <Coin>[].obs;
+  @override
   onInit() {
     super.onInit();
     fetchCoins();

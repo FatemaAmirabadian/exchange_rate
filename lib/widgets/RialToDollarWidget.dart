@@ -13,9 +13,9 @@ class _RialToDollarWidgetState extends State<RialToDollarWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('rial to dollar'),
+        title: const Text('rial to dollar'),
       ),
-      body: Container(padding: EdgeInsets.all(20),
+      body: Container(padding: const EdgeInsets.all(20),
         child: Column(children: [
           TextField(
             onChanged : (val) {
@@ -27,14 +27,14 @@ class _RialToDollarWidgetState extends State<RialToDollarWidget> {
                 border: OutlineInputBorder(),
                 labelText: "rial"
             ),),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           ElevatedButton(onPressed: (){
             setState(() {
               rial=double.parse(rtdController.text)/600000;
             });
-          }, child: Text("convert")),
-          SizedBox(height: 20,),
-          Text("Rial :" +rial.toString())
+          }, child: const Text("convert")),
+          const SizedBox(height: 20,),
+          Text("Rial :$rial")
         ],),
       ),
     );

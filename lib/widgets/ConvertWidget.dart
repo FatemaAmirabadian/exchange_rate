@@ -14,18 +14,18 @@ class _ConverterWidgetState extends State<ConverterWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Converter')),
+          title: const Text('Converter')),
       body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DollarToRialWidget()));
-              }, child: Text('Dollar To Rial')),
-              SizedBox(height: 20,),
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const DollarToRialWidget()));
+              }, child: const Text('Dollar To Rial')),
+              const SizedBox(height: 20,),
               ElevatedButton(onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> RialToDollarWidget()));
-              }, child: Text('Rial To Dollar'))
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const RialToDollarWidget()));
+              }, child: const Text('Rial To Dollar'))
             ],
           )
       ),

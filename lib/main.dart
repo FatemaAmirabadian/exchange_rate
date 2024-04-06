@@ -3,7 +3,7 @@ import './widgets/CurrencyWidget.dart';
 import './widgets/CryptoWidget.dart';
 import './widgets/ConvertWidget.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -20,11 +20,11 @@ class _MyAppState extends State<MyApp> {
       title: 'Currencies',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Currencies'),
+          title: const Text('Currencies'),
         ),
-        body: [CurrencyWidget(),CryptoWidget(),ConverterWidget()][currentPageIndex],
+        body: [const CurrencyWidget(), CryptoWidget(),const ConverterWidget()][currentPageIndex],
         bottomNavigationBar: NavigationBar(
-          destinations: [
+          destinations: const [
             NavigationDestination(icon: (Icon(Icons.attach_money_outlined)), label: 'Currency'),
             NavigationDestination(icon: (Icon(Icons.currency_bitcoin)), label: 'Crypto'),
             NavigationDestination(icon: (Icon(Icons.currency_exchange)), label: 'converter'),

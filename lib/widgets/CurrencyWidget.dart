@@ -3,6 +3,8 @@ import '../utils/currency_controller.dart';
 import 'package:get/get.dart';
 
 class CurrencyWidget extends StatefulWidget {
+  const CurrencyWidget({super.key});
+
 
   @override
   State<CurrencyWidget> createState() => _CurrencyWidgetState();
@@ -33,7 +35,7 @@ class _CurrencyWidgetState extends State<CurrencyWidget> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 15),
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 60,
                       child: Row(

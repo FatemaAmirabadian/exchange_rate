@@ -5,6 +5,7 @@ import '../models/Currency_model.dart';
 class CurrencyController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<Currency> currencyList = <Currency>[].obs;
+  @override
   onInit() {
     super.onInit();
     fetchCurrencies();

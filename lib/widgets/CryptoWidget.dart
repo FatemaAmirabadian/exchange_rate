@@ -5,12 +5,14 @@ import '../utils/crypto_controller.dart';
 class CryptoWidget extends StatelessWidget {
   final CoinController controller = Get.put(CoinController());
 
+  CryptoWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold( body: Padding(
       padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
       child: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -22,11 +24,11 @@ class CryptoWidget extends StatelessWidget {
                   : ListView.builder(
                   itemCount: 30,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 15),
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 60,
                         child: Row(
@@ -52,7 +54,7 @@ class CryptoWidget extends StatelessWidget {
                                               blurRadius: 5)
                                         ]),
                                     child: Padding(
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       child: Image.network(controller
                                           .coinsList[index].image),
                                     ),
