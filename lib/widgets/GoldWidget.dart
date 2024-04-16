@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../utils/Gold_controller.dart';
 import 'package:persian_fonts/persian_fonts.dart';
+import 'package:exchange_rate/custom_theme.dart';
 
 
 class GoldWidget extends StatefulWidget {
@@ -73,8 +72,7 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(goldController.goldList[index].goldInfo.name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
-                                                  Text(goldController.goldList[index].goldInfo.uniqueName??'',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),)],
+                                                  Text(goldController.goldList[index].goldInfo.name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),],
                                               ),
                                             ],
                                               ),

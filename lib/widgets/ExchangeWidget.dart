@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/Exchange_controller.dart';
 import 'package:persian_fonts/persian_fonts.dart';
+import 'package:exchange_rate/custom_theme.dart';
 
 
 class ExchangeWidget extends StatefulWidget {
