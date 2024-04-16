@@ -63,7 +63,7 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                 children: [
                                                   Padding(padding: EdgeInsets.only(left: 10)
                                                     ,child: CircleAvatar(
-                                                        backgroundImage: NetworkImage(goldController.goldList[index].logoUrl??'',)
+                                                        backgroundImage: NetworkImage(goldController.goldList[index].goldInfo.logoUrl??'',)
                                                     ),
                                                   ),
                                                 ],
@@ -73,8 +73,8 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(goldController.goldList[index].name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
-                                                  Text(goldController.goldList[index].uniqueName??'',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),)],
+                                                  Text(goldController.goldList[index].goldInfo.name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
+                                                  Text(goldController.goldList[index].goldInfo.uniqueName??'',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),)],
                                               ),
                                             ],
                                               ),
@@ -84,7 +84,7 @@ class _GoldWidgetState extends State<GoldWidget> {
                                               //current price
                                               Column(
                                                 mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [Text(goldController.goldList[index].id.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),)],),
+                                                children: [Text(goldController.goldList[index].currentPrice,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),)],),
                                             ],
                                           )
                                             ],

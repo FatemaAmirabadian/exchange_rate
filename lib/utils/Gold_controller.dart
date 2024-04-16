@@ -16,7 +16,7 @@ class GoldController extends GetxController {
   fetchGold() async {
     try {
       isLoading(true);
-      var response = await http.get(Uri.parse('http://146.19.212.233:8000/gold-info/'));
+      var response = await http.get(Uri.parse('http://146.19.212.233:8000/gold_and_coins/'));
       final decodedGoldResponse = utf8.decode(response.bodyBytes);
       List<Gold> golds = goldFromJson(decodedGoldResponse);
       goldList.assignAll(golds);
