@@ -6,7 +6,8 @@ import '../models/Gold_model.dart';
 class GoldController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<Gold> goldList = <Gold>[].obs;
-//
+  RxBool notFound = false.obs;
+
   @override
   onInit() {
     super.onInit();
@@ -17,9 +18,16 @@ class GoldController extends GetxController {
     try {
       isLoading(true);
       var response = await http.get(Uri.parse('http://146.19.212.233:8000/gold_and_coins/'));
-      final decodedGoldResponse = utf8.decode(response.bodyBytes);
-      List<Gold> golds = goldFromJson(decodedGoldResponse);
-      goldList.assignAll(golds);
+      if (response.statusCode == 200) {
+        final decodedResponse = utf8.decode(response.bodyBytes);
+        List<Gold> exchanges = goldFromJson(decodedResponse);
+        goldList.assignAll(exchanges);
+      } else if (response.statusCode == 404) {
+        notFound(true);
+      }
+    }catch (e) {
+      print(e);
+      // Handle exception
     } finally {
       isLoading(false);
     }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/Gold_controller.dart';
 import 'package:persian_fonts/persian_fonts.dart';
-import 'package:exchange_rate/custom_theme.dart';
+import 'GoldDetailPage.dart';
+import 'NotFoundWidget.dart';
 
 
 class GoldWidget extends StatefulWidget {
@@ -31,75 +32,100 @@ class _GoldWidgetState extends State<GoldWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Obx(() => goldController.isLoading.value
-                    ?Center(
-                  child: CircularProgressIndicator(),
-                )
-                    :ListView.builder(
-                    itemCount: goldController.goldList.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(padding: EdgeInsets.only(left: 10,right: 10),
-                        child: Column(
-                            children:[
-                              SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 70,
-                                  child:
-                                  Container(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          //icons and names
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              //icon
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+
+                Obx(() {
+                  if (goldController.isLoading.value) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    if (goldController.notFound.value) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: NotFoundWidget(),);
+                    } else {
+                      return
+                        ListView.builder(
+                            itemCount: goldController.goldList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  // Navigate to detail page when an item is tapped
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => GoldDetailPage(
+                                        goldInfo: goldController.goldList[index].goldInfo,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),
+                                  child: Column(
+                                      children:[
+                                        SizedBox(
+                                            width: MediaQuery.of(context).size.width,
+                                            height: 70,
+                                            child:
+                                            Container(
+                                              padding: const EdgeInsets.all(5),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Padding(padding: EdgeInsets.only(left: 10)
-                                                    ,child: CircleAvatar(
-                                                        backgroundImage: NetworkImage(goldController.goldList[index].goldInfo.logoUrl??'',)
-                                                    ),
+                                                  //icons and names
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      //icon
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Padding(padding: EdgeInsets.only(left: 10)
+                                                            ,child: CircleAvatar(
+                                                                backgroundImage: NetworkImage(goldController.goldList[index].goldInfo.logoUrl??'',)
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      //name
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(goldController.goldList[index].goldInfo.name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),],
+                                                      ),
+                                                    ],
                                                   ),
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      //current price
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [Text(goldController.goldList[index].currentPrice??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),)],),
+                                                    ],
+                                                  )
                                                 ],
                                               ),
-                                              //name
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(goldController.goldList[index].goldInfo.name??'',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),],
-                                              ),
-                                            ],
-                                              ),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              //current price
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [Text(goldController.goldList[index].currentPrice,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),)],),
-                                            ],
-                                          )
-                                            ],
-                                    ),
-                                  )
+                                            )
 
-                              ),
-                              Divider(
-                                color: Colors.grey[300], // Set the color of the divider
-                                height: 1.0, // Set the height of the divider
-                              ),
-                            ]),);
+                                        ),
+                                        Divider(
+                                          color: Colors.grey[300], // Set the color of the divider
+                                          height: 1.0, // Set the height of the divider
+                                        ),
+                                      ]),),
+                              );
+                            }
+                        );
                     }
-                ))
+                  }
+                }),
               ],
             ),
           ),
         ),
       ),
     );}}
+
+

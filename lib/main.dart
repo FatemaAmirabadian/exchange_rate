@@ -30,6 +30,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentPageIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,34 +69,47 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        body: [
-          GoldWidget(),
-          ExchangeWidget(),
-        ][currentPageIndex],
-        bottomNavigationBar: Container(
-          height: 70,
-          child: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.diamond_outlined, size: 32),
-                label: 'gold',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.attach_money, size: 32),
-                label: 'currencies',
-              ),
-            ],
-            currentIndex: currentPageIndex,
-            onTap: (int index) {
-              setState(() {
-                currentPageIndex = index;
-              });
-            },
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-          ),
+        body: PageView(
+          controller: _pageController,
+          children: [
+            GoldWidget(),
+            ExchangeWidget(),
+          ],
+          onPageChanged: (index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.diamond_outlined, size: 32),
+              label: 'gold',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money, size: 32),
+              label: 'currencies',
+            ),
+          ],
+          currentIndex: currentPageIndex,
+          onTap: (int index) {
+            _pageController.animateToPage(
+              index,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.ease,
+            );
+          },
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }
