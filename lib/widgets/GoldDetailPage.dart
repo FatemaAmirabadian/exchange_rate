@@ -10,8 +10,12 @@ class GoldDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(goldInfo.name),
-      ),
+        title: Row(
+          children: [
+            Expanded(child: Container()), // Empty container to push title to the right
+            Text(goldInfo.name),
+          ],
+        ),      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

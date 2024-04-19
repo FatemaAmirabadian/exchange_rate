@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import './widgets/ExchangeWidget.dart';
 import './widgets/GoldWidget.dart';
 import 'package:persian_fonts/persian_fonts.dart';
-import 'custom_theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             currentPageIndex == 0 ? 'طلا و سکه' : 'ارزها',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: CustomTheme.lightTheme.primaryColor,
+          backgroundColor: Colors.purple,
           iconTheme: IconThemeData(color: Colors.white),
         ),
         drawer: Drawer(
@@ -57,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Container(
                 height: 80,
-                color: CustomTheme.lightTheme.primaryColor,
+                color: Colors.purple,
               ),
               SizedBox(height: 30),
               ListTile(
@@ -84,11 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.diamond_outlined, size: 32),
+              icon: Icon(Icons.diamond_outlined, size: 25),
               label: 'gold',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.attach_money, size: 32),
+              icon: Icon(Icons.attach_money, size: 25),
               label: 'currencies',
             ),
           ],

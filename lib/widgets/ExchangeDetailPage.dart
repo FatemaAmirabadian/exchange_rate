@@ -10,6 +10,14 @@ class ExchangeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Expanded(child: Container()), // Empty container to push title to the right
+            Text(currencyInfo.persianName,),
+          ],
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

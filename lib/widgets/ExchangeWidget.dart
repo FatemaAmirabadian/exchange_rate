@@ -4,6 +4,7 @@ import '../utils/Exchange_controller.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'NotFoundWidget.dart';
 import 'ExchangeDetailPage.dart';
+import 'CustomLoadingWidget.dart';
 
 class ExchangeWidget extends StatefulWidget {
   const ExchangeWidget({super.key});
@@ -33,7 +34,13 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                 children: [
                   Obx(() {
                     if (exchangeController.isLoading.value) {
-                      return Center(child: CircularProgressIndicator());
+                      return Container(
+                          width:MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment:MainAxisAlignment.center,
+                              children:[ CustomLoadingWidget(loadingText: 'Loading...')]));
                     } else {
                       if (exchangeController.notFound.value) {
                         return Container(

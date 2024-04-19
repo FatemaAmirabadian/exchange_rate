@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/Gold_controller.dart';
 import 'package:persian_fonts/persian_fonts.dart';
+import 'CustomLoadingWidget.dart';
 import 'GoldDetailPage.dart';
 import 'NotFoundWidget.dart';
 
@@ -35,7 +36,13 @@ class _GoldWidgetState extends State<GoldWidget> {
 
                 Obx(() {
                   if (goldController.isLoading.value) {
-                    return Center(child: CircularProgressIndicator());
+                      return Container(
+                          width:MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment:MainAxisAlignment.center,
+                              children:[ CustomLoadingWidget(loadingText: 'Loading...')]));
                   } else {
                     if (goldController.notFound.value) {
                       return Container(
