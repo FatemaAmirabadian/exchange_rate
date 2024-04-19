@@ -128,7 +128,6 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                             children: [Text(exchangeController.exchangesList[index].currentPrice,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),)],
                                                           ),
-
                                                         ],
                                                       )
                                                     ]

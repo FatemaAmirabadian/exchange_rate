@@ -25,6 +25,7 @@ class ExchangeDetailPage extends StatelessWidget {
             Text('${currencyInfo.persianName}'),
             Text('${exchange.currentPrice}'),
             Text('${currencyInfo.country}'),
+            Text('${exchange.createdAt.toString()}'),
           ],
         ),
       ),
