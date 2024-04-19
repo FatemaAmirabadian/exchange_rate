@@ -15,7 +15,38 @@ class MyApp extends StatelessWidget {
         textTheme: PersianFonts.vazirTextTheme,
       ),
       title: 'Currencies',
-      home: MyHomePage(),
+      home: DoubleTapExitApp(),
+    );
+  }
+}
+
+class DoubleTapExitApp extends StatefulWidget {
+  @override
+  _DoubleTapExitAppState createState() => _DoubleTapExitAppState();
+}
+
+class _DoubleTapExitAppState extends State<DoubleTapExitApp> {
+  DateTime? currentBackPressTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        final now = DateTime.now();
+        if (currentBackPressTime == null ||
+            now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+          currentBackPressTime = now;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('برای خروج مجددا دکمه بازگشت را فشار دهید.'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return false;
+        }
+        return true;
+      },
+      child: MyHomePage(),
     );
   }
 }
