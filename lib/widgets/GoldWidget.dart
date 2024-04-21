@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/Gold_controller.dart';
@@ -88,7 +89,9 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                   Padding(
                                                     padding: EdgeInsets.only(left: 10),
                                                     child: CircleAvatar(
-                                                      backgroundImage: NetworkImage(goldController.goldList[index].goldInfo.logoUrl ?? ''),
+                                                      backgroundImage: CachedNetworkImageProvider(
+                                                        goldController.goldList[index].goldInfo?.logoUrl ?? '',
+                                                      ),
                                                     ),
                                                   ),
                                                 ],

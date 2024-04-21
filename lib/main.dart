@@ -39,7 +39,7 @@ class _DoubleTapExitAppState extends State<DoubleTapExitApp> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('برای خروج مجددا دکمه بازگشت را فشار دهید.'),
-              duration: Duration(seconds: 2),
+              duration: Duration(seconds: 5),
             ),
           );
           return false;

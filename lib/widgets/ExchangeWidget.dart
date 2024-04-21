@@ -4,6 +4,8 @@ import '../utils/Exchange_controller.dart';
 import 'NotFoundWidget.dart';
 import 'ExchangeDetailPage.dart';
 import 'CustomLoadingWidget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class ExchangeWidget extends StatefulWidget {
   const ExchangeWidget({super.key});
@@ -89,7 +91,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                                                 Padding(
                                                   padding: EdgeInsets.only(left: 10),
                                                   child: CircleAvatar(
-                                                    backgroundImage: NetworkImage(
+                                                    backgroundImage: CachedNetworkImageProvider(
                                                       exchangeController.exchangesList[index].currencyInfo?.logoUrl ?? '',
                                                     ),
                                                   ),
