@@ -1,21 +1,29 @@
+import 'package:exchange_rate/providers/ThemeProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './widgets/ExchangeWidget.dart';
 import './widgets/GoldWidget.dart';
-import 'package:persian_fonts/persian_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        textTheme: PersianFonts.vazirTextTheme,
-      ),
-      title: 'Currencies',
-      home: DoubleTapExitApp(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          theme: themeProvider.getTheme(),
+          title: 'Currencies',
+          home: DoubleTapExitApp(),
+        );
+      },
     );
   }
 }
@@ -70,6 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -78,23 +88,27 @@ class _MyHomePageState extends State<MyHomePage> {
             currentPageIndex == 0 ? 'طلا و سکه' : 'ارزها',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.purple,
+          backgroundColor: themeProvider.isDarkMode() ? Colors.black : Colors.purple,
           iconTheme: IconThemeData(color: Colors.white),
         ),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              Container(
-                height: 80,
-                color: Colors.purple,
-              ),
               SizedBox(height: 30),
-              ListTile(
-                title: Text('زبان فارسی'),
+              SwitchListTile(
+                title: Text('Dark Mode'),
+                value: themeProvider.isDarkMode(),
+                onChanged: (value) {
+                  themeProvider.toggleDarkMode(value);
+                },
               ),
-              ListTile(
-                title: Text('زبان انگلیسی'),
+              SwitchListTile(
+                title: Text('Second Theme'),
+                value: themeProvider.isSecondTheme(),
+                onChanged: (value) {
+                  themeProvider.toggleSecondTheme(value);
+                },
               ),
             ],
           ),
@@ -132,7 +146,9 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          selectedItemColor: themeProvider.isDarkMode() ? Colors.white : Colors.purple, // Change color based on theme
         ),
+
       ),
     );
   }

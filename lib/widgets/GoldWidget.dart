@@ -2,13 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/Gold_controller.dart';
-import 'package:persian_fonts/persian_fonts.dart';
 import 'CustomLoadingWidget.dart';
 import 'GoldDetailPage.dart';
 import 'NotFoundWidget.dart';
+import '../providers/ThemeProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart' as intl;
 
 class GoldWidget extends StatefulWidget {
-  const GoldWidget({Key? key});
+  const GoldWidget({Key? key}) : super(key: key);
 
   @override
   State<GoldWidget> createState() => _GoldWidgetState();
@@ -19,6 +21,8 @@ class _GoldWidgetState extends State<GoldWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -48,7 +52,115 @@ class _GoldWidgetState extends State<GoldWidget> {
                       child: NotFoundWidget(),
                     );
                   } else {
-                    return ListView.builder(
+                    return themeProvider.isSecondTheme()
+                        ? Column(
+                      children: [
+                        SizedBox(height: 5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Row(
+                                children: [
+                                  Text(intl.DateFormat.yMd().add_jm().format(goldController.goldList[0].createdAt)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: GridView.builder(
+                            itemCount: goldController.goldList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 15, // Increased spacing
+                              mainAxisSpacing: 15, // Increased spacing
+                            ),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(15), // Rounded corners
+                                  child: InkWell(
+                                    onTap: () {
+                                      // Navigate to detail page when an item is tapped
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => GoldDetailPage(
+                                           goldInfo: goldController.goldList[index].goldInfo!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    constraints: BoxConstraints(maxWidth: 100),
+                                                    child: Text(
+                                                      goldController.goldList[index].goldInfo?.name ?? '',
+                                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Image.network(
+                                                goldController.goldList[index].goldInfo?.logoUrl ?? '',
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 30),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                goldController.goldList[index].currentPrice ?? '',
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,color: Colors.grey),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 5,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                goldController.goldList[index].currentPrice ?? '',
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                        : ListView.builder(
                       itemCount: goldController.goldList.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -56,12 +168,11 @@ class _GoldWidgetState extends State<GoldWidget> {
                         return Material(
                           child: InkWell(
                             onTap: () {
-                              // Navigate to detail page when an item is tapped
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => GoldDetailPage(
-                                    goldInfo: goldController.goldList[index].goldInfo,
+                                    goldInfo: goldController.goldList[index].goldInfo!,
                                   ),
                                 ),
                               );
@@ -78,11 +189,9 @@ class _GoldWidgetState extends State<GoldWidget> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          //icons and names
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              //icon
                                               Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
@@ -96,13 +205,12 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                   ),
                                                 ],
                                               ),
-                                              //name
                                               Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    goldController.goldList[index].goldInfo.name ?? '',
+                                                    goldController.goldList[index].goldInfo?.name ?? '',
                                                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                                   ),
                                                 ],
@@ -112,7 +220,6 @@ class _GoldWidgetState extends State<GoldWidget> {
                                           Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              //current price
                                               Column(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
