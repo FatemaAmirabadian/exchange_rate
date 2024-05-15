@@ -53,120 +53,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                     );
                   } else {
                     return themeProvider.isSecondTheme()
-                        ? Column(
-                      children: [
-                        SizedBox(height: 5,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15),
-                              child: Row(
-                                children: [
-                                  Text(intl.DateFormat.yMd().add_jm().format(exchangeController.exchangesList[0].createdAt)),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: GridView.builder(
-                                                        itemCount: exchangeController.exchangesList.length,
-                                                        shrinkWrap: true,
-                                                        physics: const NeverScrollableScrollPhysics(),
-                                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 15, // Increased spacing
-                                mainAxisSpacing: 15, // Increased spacing
-                                                        ),
-                                                        itemBuilder: (context, index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Material(
-                                    borderRadius: BorderRadius.circular(15), // Rounded corners
-                                    child: InkWell(
-                                      onTap: () {
-                                        // Navigate to detail page when an item is tapped
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ExchangeDetailPage(
-                                              exchange: exchangeController.exchangesList[index]!,
-                                              currencyInfo: exchangeController.exchangesList[index].currencyInfo!,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      constraints: BoxConstraints(maxWidth: 100),
-                                                      child: Text(
-                                                        exchangeController.exchangesList[index].currencyInfo?.engName ?? '',
-                                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.grey),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      exchangeController.exchangesList[index].currencyInfo?.alphabetCode ?? '',
-                                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Image.network(
-                                                  exchangeController.exchangesList[index].currencyInfo?.logoUrl ?? '',
-                                                  width: 25,
-                                                  height: 25,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 30),
-                                           Row(
-                                             mainAxisAlignment: MainAxisAlignment.end,
-                                             children: [
-                                               Text(
-                                                 exchangeController.exchangesList[index].currentPrice ?? '',
-                                                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,color: Colors.grey),
-                                               ),
-                                             ],
-                                           ),
-                                            SizedBox(height: 5,),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  exchangeController.exchangesList[index].currentPrice ?? '',
-                                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-
-                                                        },
-                                                      ),
-                              ),
-                            ],
-                          )
-
-                          : ListView.builder(
+                        ? ListView.builder(
                         itemCount: exchangeController.exchangesList.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -257,7 +144,119 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                             ),
                           );
                         },
-                      );
+                      )
+                        : Column(
+                      children: [
+                        SizedBox(height: 5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Row(
+                                children: [
+                                  Text(intl.DateFormat.yMd().add_jm().format(exchangeController.exchangesList[0].createdAt)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: GridView.builder(
+                            itemCount: exchangeController.exchangesList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 15, // Increased spacing
+                              mainAxisSpacing: 15, // Increased spacing
+                            ),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(15), // Rounded corners
+                                  child: InkWell(
+                                    onTap: () {
+                                      // Navigate to detail page when an item is tapped
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ExchangeDetailPage(
+                                            exchange: exchangeController.exchangesList[index]!,
+                                            currencyInfo: exchangeController.exchangesList[index].currencyInfo!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    constraints: BoxConstraints(maxWidth: 100),
+                                                    child: Text(
+                                                      exchangeController.exchangesList[index].currencyInfo?.engName ?? '',
+                                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.grey),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    exchangeController.exchangesList[index].currencyInfo?.alphabetCode ?? '',
+                                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                              Image.network(
+                                                exchangeController.exchangesList[index].currencyInfo?.logoUrl ?? '',
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 30),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                exchangeController.exchangesList[index].currentPrice ?? '',
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,color: Colors.grey),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 5,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                exchangeController.exchangesList[index].currentPrice ?? '',
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+
+                            },
+                          ),
+                        ),
+                      ],
+                    );
                   }
                 }
               }),
