@@ -1,4 +1,4 @@
-import 'package:exchange_rate/providers/ThemeProvider.dart';
+import './providers/ThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './widgets/ExchangeWidget.dart';

@@ -149,7 +149,10 @@ class _GoldWidgetState extends State<GoldWidget> {
                               padding: const EdgeInsets.only(left: 15),
                               child: Row(
                                 children: [
-                                  Text(intl.DateFormat.yMd().add_jm().format(goldController.goldList[0].createdAt)),
+                                  Text(
+                                    intl.DateFormat.yMd().add_jm().format(goldController.goldList[0].createdAt.toLocal()),
+                                    style: TextStyle(color: Colors.grey[700]),
+                                  ),
                                 ],
                               ),
                             ),
@@ -207,11 +210,12 @@ class _GoldWidgetState extends State<GoldWidget> {
                                                   ),
                                                 ],
                                               ),
-                                              Image.network(
-                                                goldController.goldList[index].goldInfo?.logoUrl ?? '',
-                                                width: 25,
-                                                height: 25,
-                                              ),
+                                              Image(
+                                                image:
+                                              CachedNetworkImageProvider(
+                                                goldController.goldList[index].goldInfo?.logoUrl ?? ''),
+                                              width: 25,
+                                              height: 25,)
                                             ],
                                           ),
                                           SizedBox(height: 30),

@@ -28,7 +28,8 @@ class CustomLoadingWidget extends StatelessWidget {
           SizedBox(height: 16.0),
           Text(
             loadingText,
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: 16.0,
+            color: Colors.grey[700]),
           ),
         ],
       ),

@@ -155,7 +155,11 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                               padding: const EdgeInsets.only(left: 15),
                               child: Row(
                                 children: [
-                                  Text(intl.DateFormat.yMd().add_jm().format(exchangeController.exchangesList[0].createdAt)),
+                                  Text(
+                                    intl.DateFormat.yMd().add_jm().format(exchangeController.exchangesList[0].createdAt.toLocal()),
+                                    style: TextStyle(color: Colors.grey[700]),
+                                  ),
+
                                 ],
                               ),
                             ),
@@ -218,11 +222,12 @@ class _ExchangeWidgetState extends State<ExchangeWidget> {
                                                   ),
                                                 ],
                                               ),
-                                              Image.network(
-                                                exchangeController.exchangesList[index].currencyInfo?.logoUrl ?? '',
+                                              Image(
+                                                image:
+                                                CachedNetworkImageProvider(
+                                                    exchangeController.exchangesList[index].currencyInfo?.logoUrl ?? ''),
                                                 width: 25,
-                                                height: 25,
-                                              ),
+                                                height: 25,)
                                             ],
                                           ),
                                           SizedBox(height: 30),
