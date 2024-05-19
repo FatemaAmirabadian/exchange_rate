@@ -1,3 +1,5 @@
+import 'package:chand/widgets/SplashScreen.dart';
+
 import './providers/ThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +10,10 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
-      child: MyApp(),
+      child: MaterialApp(
+        title: 'Currencies',
+        home: SplashScreen(),
+      ),
     ),
   );
 }
